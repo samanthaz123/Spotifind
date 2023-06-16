@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-image: url("{{ url_for('static', filename='bg_background.jpg') }}");
+            background-size: cover;
+        }
+        .header-footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .logo, .clickable-images {
+            display: flex;
+            align-items: center;
+        }
+        .header-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+        }
+        .clickable-images a:not(:last-child) {
+            margin-right: 20px;  /* Add space to the right of the image */
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 120px);
+        }
+        .black-square {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 250px;
+            height: 250px;
+            overflow: auto;
+        }
+        .black-square h2 {
+            margin-bottom: 20px;  /* Add space below the title */
+        }
+        .auth-button {
+            background-color: white;
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+            border: 2px solid white;
+        }
+        .auth-button:hover {
+            background-color: rgb(0, 0, 0);
+            border: 2px solid #ffffff;
+            color: rgb(255, 255, 255);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="header-footer">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='sz_logo.jpg') }}" alt="Logo" class="header-image" />
+        </div>
+        <div class="clickable-images">
+            <a href="#"><img src="{{ url_for('static', filename='github_logo.png') }}" alt="Image 1" class="header-image" /></a>
+            <a href="#"><img src="{{ url_for('static', filename='homepage_logo.png') }}" alt="Image 2" class="header-image" /></a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="black-square">
+            <h2>SpotiFind</h2>
+            <p>SpotiFind is a personalized music discovery app. 
+                It curates your top tracks and artists, and recommends 
+                new songs based on your listening patterns. </p>
+            <a href="/login" class="auth-button">Authenticate</a>
+        </div>
+    </div>
+</body>
+</html>
