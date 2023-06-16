@@ -1,0 +1,2 @@
+# Spotifind
+Music Discovery App
