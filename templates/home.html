@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+         .header-footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .logo, .clickable-images {
+            display: flex;
+            align-items: center;
+        }
+        .header-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+        }
+        .clickable-images a:not(:last-child) {
+            margin-right: 20px;  /* Add space to the right of the image */
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .section {
+            flex: 1;
+            margin: 10px;
+            margin-top: 100px;
+            padding: 10px;
+            border: 1px solid black;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        .section h1 {
+            text-align: center;  /* Add this to center the section titles */
+        }
+        .section ul {
+            line-height: 1.5;  /* Add space between lines in the <ul> */
+        }
+        .album-image-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .album-image {
+            margin: 30px;
+            padding: 30px;
+            display: flex;
+            justify-content: center; /* center the image horizontally */
+            align-items: center; /* center the image vertically */
+        }
+        .album-image img {
+            max-width: 300px;
+            max-height: 300px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-footer">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='sz_logo.jpg') }}" alt="Logo" class="header-image" />
+        </div>
+        <div class="clickable-images">
+            <a href="#"><img src="{{ url_for('static', filename='github_logo.png') }}" alt="Image 1" class="header-image" /></a>
+            <a href="#"><img src="{{ url_for('static', filename='homepage_logo.png') }}" alt="Image 2" class="header-image" /></a>
+        </div>
+    </div>
+    <!-- Main Content Container -->
+   
+
+    <div class="container">
+
+        <!-- Top Tracks Section -->
+        <div class="section">
+            <h1>Top Tracks</h1>
+            <ul>
+                {% for track in top_tracks %}
+                    <li>{{ track.name }} by {{ track.artists }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- Top Tracks Image -->
+        <!-- Top Artists Section -->
+        <div class="section">
+            <h1>Top Artists</h1>
+            <ul>
+                {% for artist in top_artists %}
+                    <li>{{ artist }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Recommended Tracks Section -->
+        <div class="section">
+            <h1>Recommended Tracks</h1>
+            <ul>
+                {% for track in recommended_tracks %}
+                    <li>{{ track.name }} by {{ track.artists }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="album-image-container">
+        <div class="album-image">
+            <img src="{{ top_tracks[0].image }}" alt="{{ top_tracks[0].name }}" />
+        </div>
+        <div class="album-image">
+            <img src="{{ recommended_tracks[0].image }}" alt="{{ recommended_tracks[0].name }}" />
+        </div>
+    </div>
+</body>
+</html>
