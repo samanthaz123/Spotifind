@@ -50,11 +50,19 @@ def login():
     return redirect(auth_url)
 
 # Callback route
-@app.route('/callback')
 def callback():
     code = request.args.get('code')
-    token_info = sp_oauth.get_access_token(code)
-    session["token_info"] = token_info
+    if code is None:
+        # Handle missing code parameter
+        return "Error: Missing authorization code"
+
+    try:
+        token_info = sp_oauth.get_access_token(code)
+        session["token_info"] = token_info
+    except Exception as e:
+        # Handle token retrieval errors
+        return f"Error: Failed to retrieve access token - {str(e)}"
+
     return redirect('/home')
 
 # Home route
