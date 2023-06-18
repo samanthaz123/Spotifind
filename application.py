@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 
 #load_dotenv()  # Load environment variables from .env file
 
-app = Flask(__name__)
-app.secret_key = os.urandom(24)
+application = Flask(__name__)
+application.secret_key = os.urandom(24)
 
 # Spotify OAuth setup
 sp_oauth = SpotifyOAuth(
@@ -33,7 +33,7 @@ def get_all_items(sp, endpoint, *args, **kwargs):
 
     return items
 
-@app.route('/')
+@application.route('/')
 def index():
     token_info = session.get("token_info", None)
     if token_info:
@@ -44,7 +44,7 @@ def index():
         return render_template('index.html')
 
 # Login route
-@app.route('/login')
+@application.route('/login')
 def login():
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
@@ -66,7 +66,7 @@ def callback():
     return redirect('/home')
 
 # Home route
-@app.route('/home')
+@application.route('/home')
 def home():
     token_info = session.get("token_info", None)
     if not token_info:
@@ -104,12 +104,12 @@ def home():
     )
 
 # Refresh token if needed
-@app.before_request
+@application.before_request
 def refresh_token():
     if session.get('token_info'):
         if sp_oauth.is_token_expired(session['token_info']):
             session['token_info'] = sp_oauth.refresh_access_token(session['token_info']['refresh_token'])
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
 
