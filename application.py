@@ -4,8 +4,6 @@ import os
 from spotipy import Spotify
 from dotenv import load_dotenv
 
-#load_dotenv()  # Load environment variables from .env file
-
 application = Flask(__name__)
 application.secret_key = os.urandom(24)
 
@@ -50,6 +48,7 @@ def login():
     return redirect(auth_url)
 
 # Callback route
+@application.route('/callback')
 def callback():
     code = request.args.get('code')
     if code is None:
