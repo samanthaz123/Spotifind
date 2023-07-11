@@ -4,6 +4,8 @@ import os
 from spotipy import Spotify
 from dotenv import load_dotenv
 
+load_dotenv()  # Load environment variables from .env file
+
 application = Flask(__name__)
 application.secret_key = os.urandom(24)
 
